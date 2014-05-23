@@ -420,11 +420,13 @@ typedef enum {
             region = self.nearbyRegion;
             [_appDelegate.modelDao writeSetRegionAutomatically:YES];
             [OBAAnalytics reportEventWithCategory:@"ui_action" action:@"button_press" label:@"Set region automatically" value:nil];
+            [OBAAnalytics reportEventWithCategory:@"ui_action" action:@"set_region" label:[NSString stringWithFormat:@"Set region automatically: %@",region.regionName] value:nil];
             break;
         case OBASectionTypeAllRegions:
             region = [_regions objectAtIndex:indexPath.row];
             [_appDelegate.modelDao writeSetRegionAutomatically:NO];
             [OBAAnalytics reportEventWithCategory:@"ui_action" action:@"button_press" label:@"Set region manually" value:nil];
+            [OBAAnalytics reportEventWithCategory:@"ui_action" action:@"set_region" label:[NSString stringWithFormat:@"Set region manually: %@",region.regionName] value:nil];
             break;
         default:
             return ;

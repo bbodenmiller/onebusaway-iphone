@@ -419,14 +419,14 @@ typedef enum {
         case OBASectionTypeNearbyRegions:
             region = self.nearbyRegion;
             [_appDelegate.modelDao writeSetRegionAutomatically:YES];
-            [OBAAnalytics reportEventWithCategory:@"ui_action" action:@"button_press" label:@"Set region automatically" value:nil];
-            [OBAAnalytics reportEventWithCategory:@"ui_action" action:@"set_region" label:[NSString stringWithFormat:@"Set region automatically: %@",region.regionName] value:nil];
+            [OBAAnalytics reportEvent:@"ui_action" action:@"button_press" label:@"Set region automatically" value:nil];
+            [OBAAnalytics reportEvent:@"ui_action" action:@"set_region" label:[NSString stringWithFormat:@"Set region automatically: %@",region.regionName] value:nil];
             break;
         case OBASectionTypeAllRegions:
             region = [_regions objectAtIndex:indexPath.row];
             [_appDelegate.modelDao writeSetRegionAutomatically:NO];
-            [OBAAnalytics reportEventWithCategory:@"ui_action" action:@"button_press" label:@"Set region manually" value:nil];
-            [OBAAnalytics reportEventWithCategory:@"ui_action" action:@"set_region" label:[NSString stringWithFormat:@"Set region manually: %@",region.regionName] value:nil];
+            [OBAAnalytics reportEvent:@"ui_action" action:@"button_press" label:@"Set region manually" value:nil];
+            [OBAAnalytics reportEvent:@"ui_action" action:@"set_region" label:[NSString stringWithFormat:@"Set region manually: %@",region.regionName] value:nil];
             break;
         default:
             return ;
@@ -512,9 +512,9 @@ typedef enum {
     _didJustBeginShowingExperimental = _showExperimentalRegions;
 
     if (_showExperimentalRegions) {
-        [OBAAnalytics reportEventWithCategory:@"ui_action" action:@"button_press" label:@"Turned on Experimental Regions" value:nil];
+        [OBAAnalytics reportEvent:@"ui_action" action:@"button_press" label:@"Turned on Experimental Regions" value:nil];
     }else{
-        [OBAAnalytics reportEventWithCategory:@"ui_action" action:@"button_press" label:@"Turned off Experimental Regions" value:nil];
+        [OBAAnalytics reportEvent:@"ui_action" action:@"button_press" label:@"Turned off Experimental Regions" value:nil];
     }
     
     if (_appDelegate.modelDao.region.experimental){

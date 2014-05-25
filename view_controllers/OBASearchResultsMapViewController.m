@@ -242,7 +242,7 @@ static NSString *kOBAIncreaseContrastKey = @"OBAIncreaseContrastDefaultsKey";
 }
 
 - (void)setHighContrastStyle {
-    [OBAAnalytics reportEventWithCategory:@"accessibility" action:@"increase_contrast" label:[NSString stringWithFormat:@"Loaded view: %@ with Increased Contrast", [self class]] value:nil];
+    [OBAAnalytics reportEvent:@"accessibility" action:@"increase_contrast" label:[NSString stringWithFormat:@"Loaded view: %@ with Increased Contrast", [self class]] value:nil];
     
     self.searchBar.searchBarStyle = UISearchBarStyleDefault;
     self.searchBar.barTintColor = OBADARKGREEN;
@@ -312,7 +312,7 @@ static NSString *kOBAIncreaseContrastKey = @"OBAIncreaseContrastDefaultsKey";
 #pragma mark - UISearchBarDelegate
 
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
-    [OBAAnalytics reportEventWithCategory:@"ui_action" action:@"button_press" label:@"Search box selected" value:nil];
+    [OBAAnalytics reportEvent:@"ui_action" action:@"button_press" label:@"Search box selected" value:nil];
 
     [self.navigationItem setLeftBarButtonItem:nil animated:YES];
     [self.navigationItem setRightBarButtonItem:nil animated:YES];
@@ -333,28 +333,28 @@ static NSString *kOBAIncreaseContrastKey = @"OBAIncreaseContrastDefaultsKey";
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-    [OBAAnalytics reportEventWithCategory:@"ui_action" action:@"button_press" label:@"Cancel search button clicked" value:nil];
+    [OBAAnalytics reportEvent:@"ui_action" action:@"button_press" label:@"Cancel search button clicked" value:nil];
 
     [searchBar endEditing:YES];
     [self cancelPressed];
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    [OBAAnalytics reportEventWithCategory:@"ui_action" action:@"button_press" label:@"Search button clicked" value:nil];
+    [OBAAnalytics reportEvent:@"ui_action" action:@"button_press" label:@"Search button clicked" value:nil];
 
     OBANavigationTarget* target = nil;
     self.searchController.searchRegion = [self convertVisibleMapIntoCLRegion];
     if (kRouteSegmentIndex == self.searchTypeSegmentedControl.selectedSegmentIndex) {
         target = [OBASearch getNavigationTargetForSearchRoute:searchBar.text];
-        [OBAAnalytics reportEventWithCategory:@"ui_action" action:@"button_press" label:@"Search: Route" value:nil];
+        [OBAAnalytics reportEvent:@"ui_action" action:@"button_press" label:@"Search: Route" value:nil];
     }
     else if (kAddressSegmentIndex == self.searchTypeSegmentedControl.selectedSegmentIndex) {
         target = [OBASearch getNavigationTargetForSearchAddress:searchBar.text];
-        [OBAAnalytics reportEventWithCategory:@"ui_action" action:@"button_press" label:@"Search: Address" value:nil];
+        [OBAAnalytics reportEvent:@"ui_action" action:@"button_press" label:@"Search: Address" value:nil];
     }
     else {
         target = [OBASearch getNavigationTargetForSearchStopCode:searchBar.text];
-        [OBAAnalytics reportEventWithCategory:@"ui_action" action:@"button_press" label:@"Search: Stop" value:nil];
+        [OBAAnalytics reportEvent:@"ui_action" action:@"button_press" label:@"Search: Stop" value:nil];
     }
 
     [self.appDelegate navigateToTarget:target];
@@ -699,7 +699,7 @@ static NSString *kOBAIncreaseContrastKey = @"OBAIncreaseContrastDefaultsKey";
 #pragma mark - IBActions
 
 - (IBAction)onCrossHairsButton:(id)sender {
-    [OBAAnalytics reportEventWithCategory:@"ui_action" action:@"button_press" label:@"Clicked My Location Button" value:nil];
+    [OBAAnalytics reportEvent:@"ui_action" action:@"button_press" label:@"Clicked My Location Button" value:nil];
     OBALogDebug(@"setting auto center on current location");
     self.mapRegionManager.lastRegionChangeWasProgramatic = YES;
     [self refreshCurrentLocation];

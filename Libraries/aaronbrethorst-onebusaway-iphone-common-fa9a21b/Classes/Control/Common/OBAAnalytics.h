@@ -16,7 +16,7 @@
 
 }
 
-+ (void)reportEventWithCategory:(NSString *)category action:(NSString*)action label:(NSString*)label value:(id)value;
++ (void)reportEvent:(NSString *)category action:(NSString*)action label:(NSString*)label value:(id)value;
 + (void)reportScreenView:(NSString *)label;
 
 @end

@@ -121,7 +121,7 @@ static NSString *kOBADefaultTwitterURL = @"http://twitter.com/onebusaway";
     switch( indexPath.row) {
         case kEmailRow:
             {
-                [OBAAnalytics reportEventWithCategory:@"ui_action" action:@"button_press" label:@"Clicked Email Link" value:nil];
+                [OBAAnalytics reportEvent:@"ui_action" action:@"button_press" label:@"Clicked Email Link" value:nil];
 
                 //check if user can send email
                 if ([MFMailComposeViewController canSendMail]){
@@ -159,18 +159,18 @@ static NSString *kOBADefaultTwitterURL = @"http://twitter.com/onebusaway";
             break;
         case kTwitterRow:
             {
-                [OBAAnalytics reportEventWithCategory:@"ui_action" action:@"button_press" label:@"Clicked Twitter Link" value:nil];
+                [OBAAnalytics reportEvent:@"ui_action" action:@"button_press" label:@"Clicked Twitter Link" value:nil];
                 NSString *twitterUrl = kOBADefaultTwitterURL;
                 if (region) {
                     twitterUrl = region.twitterUrl;
                 }
                 NSString *twitterName = [[twitterUrl componentsSeparatedByString:@"/"] lastObject];
                 if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"twitter://"]]) {
-                    [OBAAnalytics reportEventWithCategory:@"ui_action" action:@"app_switch" label:@"Loaded Twitter via App" value:nil];
+                    [OBAAnalytics reportEvent:@"ui_action" action:@"app_switch" label:@"Loaded Twitter via App" value:nil];
                     NSString *url = [NSString stringWithFormat:@"twitter://user?screen_name=%@",twitterName ];
                     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
                 } else {
-                    [OBAAnalytics reportEventWithCategory:@"ui_action" action:@"app_switch" label:@"Loaded Twitter via Web" value:nil];
+                    [OBAAnalytics reportEvent:@"ui_action" action:@"app_switch" label:@"Loaded Twitter via Web" value:nil];
                     NSString *url = [NSString stringWithFormat:@"http://twitter.com/%@", twitterName];
                     [[UIApplication sharedApplication] openURL: [NSURL URLWithString: url]];
                 }
@@ -178,16 +178,16 @@ static NSString *kOBADefaultTwitterURL = @"http://twitter.com/onebusaway";
             break;
         case kFacebookRow:
             if (region.facebookUrl) {
-                [OBAAnalytics reportEventWithCategory:@"ui_action" action:@"button_press" label:@"Clicked Facebook Link" value:nil];
+                [OBAAnalytics reportEvent:@"ui_action" action:@"button_press" label:@"Clicked Facebook Link" value:nil];
                 NSString *facebookUrl = region.facebookUrl;
                 NSString *facebookPage = [[facebookUrl componentsSeparatedByString:@"/"] lastObject];
 
                 if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"fb://"]]) {
-                    [OBAAnalytics reportEventWithCategory:@"ui_action" action:@"app_switch" label:@"Loaded Facebook via App" value:nil];
+                    [OBAAnalytics reportEvent:@"ui_action" action:@"app_switch" label:@"Loaded Facebook via App" value:nil];
                     NSString *url = [NSString stringWithFormat:@"fb://profile/%@",facebookPage ];
                     [[UIApplication sharedApplication] openURL:[NSURL URLWithString: url]];
                 } else {
-                    [OBAAnalytics reportEventWithCategory:@"ui_action" action:@"app_switch" label:@"Loaded Facebook via Web" value:nil];
+                    [OBAAnalytics reportEvent:@"ui_action" action:@"app_switch" label:@"Loaded Facebook via Web" value:nil];
                     NSString *url = [NSString stringWithFormat:@"http://facebook.com/%@", facebookPage];
                     [[UIApplication sharedApplication] openURL:[NSURL URLWithString: url]];
                 }

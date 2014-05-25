@@ -262,16 +262,16 @@ static NSString *const kAllowTracking = @"allowTracking";
     ![[NSUserDefaults standardUserDefaults] boolForKey:kAllowTracking];
 
     if([self.modelDao.readCustomApiUrl isEqualToString:@""]) {
-        [OBAAnalytics reportEventWithCategory:@"app_settings" action:@"configured_region" label:[NSString stringWithFormat:@"API Region: %@",self.modelDao.region.regionName] value:nil];
+        [OBAAnalytics reportEvent:@"app_settings" action:@"configured_region" label:[NSString stringWithFormat:@"API Region: %@",self.modelDao.region.regionName] value:nil];
     }else{
-        [OBAAnalytics reportEventWithCategory:@"app_settings" action:@"configured_region" label:[NSString stringWithFormat:@"API Region: %@",self.modelDao.readCustomApiUrl] value:nil];
+        [OBAAnalytics reportEvent:@"app_settings" action:@"configured_region" label:[NSString stringWithFormat:@"API Region: %@",self.modelDao.readCustomApiUrl] value:nil];
     }
-    [OBAAnalytics reportEventWithCategory:@"app_settings" action:@"general" label:[NSString stringWithFormat:@"Set Region Automatically: %@", (self.modelDao.readSetRegionAutomatically ? @"YES" : @"NO")] value:nil];
+    [OBAAnalytics reportEvent:@"app_settings" action:@"general" label:[NSString stringWithFormat:@"Set Region Automatically: %@", (self.modelDao.readSetRegionAutomatically ? @"YES" : @"NO")] value:nil];
 
     BOOL _showExperimentalRegions = NO;
     if ([[NSUserDefaults standardUserDefaults] boolForKey: @"kOBAShowExperimentalRegionsDefaultsKey"])
         _showExperimentalRegions = [[NSUserDefaults standardUserDefaults] boolForKey: @"kOBAShowExperimentalRegionsDefaultsKey"];
-    [OBAAnalytics reportEventWithCategory:@"app_settings" action:@"general" label:[NSString stringWithFormat:@"Show Experimental Regions: %@", (_showExperimentalRegions ? @"YES" : @"NO")] value:nil];
+    [OBAAnalytics reportEvent:@"app_settings" action:@"general" label:[NSString stringWithFormat:@"Show Experimental Regions: %@", (_showExperimentalRegions ? @"YES" : @"NO")] value:nil];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -312,7 +312,7 @@ static NSString *const kAllowTracking = @"allowTracking";
             break;
     }
 
-    [OBAAnalytics reportEventWithCategory:@"app_settings" action:@"startup" label:[NSString stringWithFormat:@"Startup View: %@",startupView] value:nil];
+    [OBAAnalytics reportEvent:@"app_settings" action:@"startup" label:[NSString stringWithFormat:@"Startup View: %@",startupView] value:nil];
 }
 
 - (void) _navigateToTargetInternal:(OBANavigationTarget*)navigationTarget {

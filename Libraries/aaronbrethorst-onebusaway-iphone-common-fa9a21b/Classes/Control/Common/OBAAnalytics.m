@@ -16,7 +16,7 @@
 
 @implementation OBAAnalytics
 
-+ (void)reportEventWithCategory:(NSString *)category action:(NSString*)action label:(NSString*)label value:(id)value
++ (void)reportEvent:(NSString *)category action:(NSString*)action label:(NSString*)label value:(id)value
 {
     [TestFlight passCheckpoint:label];
     [[GAI sharedInstance].defaultTracker send:[[GAIDictionaryBuilder createEventWithCategory:category action:action label:label value:value] build]];

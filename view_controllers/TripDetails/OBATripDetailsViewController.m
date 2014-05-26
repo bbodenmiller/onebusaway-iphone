@@ -168,6 +168,8 @@ typedef enum {
 - (void)didSelectScheduleRowAtIndexPath:(NSIndexPath *)indexPath tableView:(UITableView *)tableView {
     if (indexPath.row == 0) {
         if (self.tripDetails) {
+            [OBAAnalytics reportEvent:@"ui_action" action:@"button_press" label:@"Show route on map" value:nil];
+
             OBATripScheduleMapViewController *vc = [[OBATripScheduleMapViewController alloc]initWithApplicationDelegate:self.appDelegate];
             vc.tripInstance = self.tripInstance;
             vc.tripDetails = self.tripDetails;
@@ -177,6 +179,8 @@ typedef enum {
     }
     else if (indexPath.row == 1) {
         if (self.tripDetails) {
+            [OBAAnalytics reportEvent:@"ui_action" action:@"button_press" label:@"Show trip schedule" value:nil];
+
             OBATripScheduleListViewController *vc = [[OBATripScheduleListViewController alloc] initWithApplicationDelegate:self.appDelegate tripInstance:self.tripInstance];
             vc.tripDetails = self.tripDetails;
             vc.currentStopId = self.currentStopId;
@@ -188,6 +192,8 @@ typedef enum {
 - (void)didSelectActionRowAtIndexPath:(NSIndexPath *)indexPath tableView:(UITableView *)tableView {
     if (indexPath.row == 0) {
         if (self.tripDetails) {
+            [OBAAnalytics reportEvent:@"ui_action" action:@"button_press" label:@"Report route/trip problem" value:nil];
+
             OBAReportProblemWithTripViewController *vc = [[OBAReportProblemWithTripViewController alloc] initWithApplicationDelegate:self.appDelegate tripInstance:self.tripInstance trip:self.tripDetails.trip];
             vc.currentStopId = self.currentStopId;
             [self.navigationController pushViewController:vc animated:YES];

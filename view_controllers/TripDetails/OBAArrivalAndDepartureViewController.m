@@ -330,6 +330,8 @@ typedef enum {
 - (void) didSelectScheduleRowAtIndexPath:(NSIndexPath *)indexPath tableView:(UITableView *)tableView {
     OBATripInstanceRef * tripInstance = _arrivalAndDeparture.tripInstance;
     if( indexPath.row == 0 ) {
+        [OBAAnalytics reportEvent:@"ui_action" action:@"button_press" label:@"Report route/trip problem" value:nil];
+
         OBATripScheduleMapViewController *vc = [[OBATripScheduleMapViewController alloc] initWithApplicationDelegate:_appDelegate];
         vc.tripInstance = tripInstance;
         vc.currentStopId = _arrivalAndDeparture.stopId;

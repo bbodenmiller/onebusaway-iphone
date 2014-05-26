@@ -169,6 +169,7 @@
 }
 
 - (IBAction) onSaveButton:(id)sender {
+    [OBAAnalytics reportEvent:@"ui_action" action:@"button_press" label:@"Add bookmark" value:nil];
         
     OBAModelDAO * dao = _appDelegate.modelDao;
     

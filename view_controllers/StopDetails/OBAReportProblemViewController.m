@@ -90,6 +90,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.row) {
         case 0: {
+            [OBAAnalytics reportEvent:@"ui_action" action:@"button_press" label:@"Report stop problem" value:nil];
+
             OBAReportProblemWithStopViewController * vc = [[OBAReportProblemWithStopViewController alloc] initWithApplicationDelegate:_appDelegate stop:_stop];
             [self.navigationController pushViewController:vc animated:YES];
             break;

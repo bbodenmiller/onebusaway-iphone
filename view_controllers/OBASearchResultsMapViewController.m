@@ -312,7 +312,7 @@ static NSString *kOBAIncreaseContrastKey = @"OBAIncreaseContrastDefaultsKey";
 #pragma mark - UISearchBarDelegate
 
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
-    [OBAAnalytics reportEvent:@"ui_action" action:@"button_press" label:@"Search box selected" value:nil];
+    [OBAAnalytics reportEvent:@"ui_action" action:@"textbox_select" label:@"Search" value:nil];
 
     [self.navigationItem setLeftBarButtonItem:nil animated:YES];
     [self.navigationItem setRightBarButtonItem:nil animated:YES];
@@ -333,14 +333,14 @@ static NSString *kOBAIncreaseContrastKey = @"OBAIncreaseContrastDefaultsKey";
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-    [OBAAnalytics reportEvent:@"ui_action" action:@"button_press" label:@"Cancel search button clicked" value:nil];
+    [OBAAnalytics reportEvent:@"ui_action" action:@"button_press" label:@"Cancel search" value:nil];
 
     [searchBar endEditing:YES];
     [self cancelPressed];
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    [OBAAnalytics reportEvent:@"ui_action" action:@"button_press" label:@"Search button clicked" value:nil];
+    [OBAAnalytics reportEvent:@"ui_action" action:@"button_press" label:@"Search" value:nil];
 
     OBANavigationTarget* target = nil;
     self.searchController.searchRegion = [self convertVisibleMapIntoCLRegion];
@@ -699,7 +699,7 @@ static NSString *kOBAIncreaseContrastKey = @"OBAIncreaseContrastDefaultsKey";
 #pragma mark - IBActions
 
 - (IBAction)onCrossHairsButton:(id)sender {
-    [OBAAnalytics reportEvent:@"ui_action" action:@"button_press" label:@"Clicked My Location Button" value:nil];
+    [OBAAnalytics reportEvent:@"ui_action" action:@"button_press" label:@"My Location" value:nil];
     OBALogDebug(@"setting auto center on current location");
     self.mapRegionManager.lastRegionChangeWasProgramatic = YES;
     [self refreshCurrentLocation];

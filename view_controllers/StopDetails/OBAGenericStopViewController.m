@@ -863,13 +863,15 @@ static NSString *kOBAIncreaseContrastKey = @"OBAIncreaseContrastDefaultsKey";
 - (void)tableView:(UITableView *)tableView didSelectTripRowAtIndexPath:(NSIndexPath *)indexPath {
     NSArray * arrivals = _showFilteredArrivals ? _filteredArrivals : _allArrivals;
     if ((arrivals.count == 0 && indexPath.row == 1) || (arrivals.count == indexPath.row && arrivals.count > 0)) {
-        [OBAAnalytics reportEvent:@"ui_action" action:@"button_press" label:@"Clicked load more arrivals button" value:nil];
+        [OBAAnalytics reportEvent:@"ui_action" action:@"button_press" label:@"Load more arrivals" value:nil];
 
         [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
         self.minutesAfter += 30;
         [self refresh];
     }
     else if ( 0 <= indexPath.row && indexPath.row < arrivals.count ) {
+        [OBAAnalytics reportEvent:@"ui_action" action:@"button_press" label:@"Route" value:nil];
+
         OBAArrivalAndDepartureV2 * arrivalAndDeparture = arrivals[indexPath.row];
         OBAArrivalAndDepartureViewController * vc = [[OBAArrivalAndDepartureViewController alloc] initWithApplicationDelegate:_appDelegate arrivalAndDeparture:arrivalAndDeparture];
         [self.navigationController pushViewController:vc animated:YES];
@@ -882,11 +884,15 @@ static NSString *kOBAIncreaseContrastKey = @"OBAIncreaseContrastDefaultsKey";
             OBAEditStopBookmarkViewController * vc = nil;
             OBABookmarkV2 * bookmark = [self existingBookmark];
             if (!bookmark) {
+                [OBAAnalytics reportEvent:@"ui_action" action:@"button_press" label:@"Add to bookmarks" value:nil];
+
                 bookmark = [_appDelegate.modelDao createTransientBookmark:_result.stop];
                 
                 vc = [[OBAEditStopBookmarkViewController alloc] initWithApplicationDelegate:_appDelegate bookmark:bookmark editType:OBABookmarkEditNew];
             }
             else {
+                [OBAAnalytics reportEvent:@"ui_action" action:@"button_press" label:@"Edit bookmark" value:nil];
+
                 vc = [[OBAEditStopBookmarkViewController alloc] initWithApplicationDelegate:_appDelegate bookmark:bookmark editType:OBABookmarkEditExisting];
             }
             [self.navigationController pushViewController:vc animated:YES];
@@ -909,6 +915,8 @@ static NSString *kOBAIncreaseContrastKey = @"OBAIncreaseContrastDefaultsKey";
         }
 
         case 4: {
+            [OBAAnalytics reportEvent:@"ui_action" action:@"button_press" label:@"Filter routes" value:nil];
+
             OBAEditStopPreferencesViewController * vc = [[OBAEditStopPreferencesViewController alloc] initWithApplicationDelegate:_appDelegate stop:_result.stop];
             [self.navigationController pushViewController:vc animated:YES];
             break;
@@ -918,6 +926,8 @@ static NSString *kOBAIncreaseContrastKey = @"OBAIncreaseContrastDefaultsKey";
 }
 
 - (IBAction)onRefreshButton:(id)sender {
+    [OBAAnalytics reportEvent:@"ui_action" action:@"button_press" label:@"Refresh stop arrivals" value:nil];
+
     [self refresh];
 }
 

@@ -208,6 +208,8 @@
     OBAModelDAO * modelDao = self.appDelegate.modelDao;
     id obj = [self objectAtRow:indexPath.row];
     if ([obj isMemberOfClass:[OBABookmarkV2 class]]) {
+        [OBAAnalytics reportEvent:@"ui_action" action:@"button_press" label:@"Remove bookmark" value:nil];
+
         OBABookmarkV2 * bookmark = (OBABookmarkV2*)obj;
         
         [modelDao removeBookmark:bookmark];
